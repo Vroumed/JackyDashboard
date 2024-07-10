@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "WGCOD kart",
-    "slug": "WGCOD-kart",
+ "name": "bertinette",
+    "slug": "bertinette",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/cars.jpg",
@@ -11,17 +11,30 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": {
-      "supportsTablet": true
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/cars.jpg",
-        "backgroundColor": "#ffffff"
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.bertinette",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
       }
     },
-    "web": {
-      "favicon": "./assets/cars.jpg"
-    }
+    "android": {
+      "package": "com.anonymous.bertinette",
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "CAMERA"
+      ]
+    },
+    "plugins": [
+      "expo-system-ui"
+    ]
   }
 }
