@@ -1,13 +1,18 @@
 import { create } from "zustand";
 
 interface ConnectionState {
-  connectedCar: { ip: string; password: string; name: string; ready: boolean } | null;
+  connectedCar: {
+    ip: string;
+    password: string;
+    name: string;
+    ready: boolean;
+  } | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   connectCar: (ip: string, password: string) => Promise<void>;
 }
 
-const useStore = create<ConnectionState>((set) => ({
+const useStore = create<ConnectionState>(set => ({
   connectedCar: null,
   status: "idle",
   error: null,
