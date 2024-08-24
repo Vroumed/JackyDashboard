@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, StatusBar } from "react-native";
 import AppNavigator from "./src/navigation/AppNavigator";
-import TestScreen from "./src/screens/TestScreen";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import * as ScreenOrientation from "expo-screen-orientation";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient()
 
 export default function App() {
-  const [orientation, setOrientation] = useState(1);
-  useEffect(() => {
-    lockOrientation();
-  }, []);
-  const lockOrientation = async () => {
-    await ScreenOrientation.lockAsync(
-      ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT,
-    );
-    const o = await ScreenOrientation.getOrientationAsync();
-    setOrientation(o);
-  };
-    return (
-        <GestureHandlerRootView style={styles.container}>
-            <StatusBar barStyle="dark-content" />
-            <AppNavigator />
-        </GestureHandlerRootView>
-    );
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <View style={styles.container}>
+        <StatusBar barStyle="dark-content" />
+        <AppNavigator />
+      </View>      
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
+  );
 }
 
 const styles = StyleSheet.create({
