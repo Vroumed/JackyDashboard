@@ -10,7 +10,8 @@ const ControlScreen: React.FC = () => {
 
   useEffect(() => {
     if (connectedCar) {
-      const ws = new WebSocket(`ws://${connectedCar.ip}/ws`);
+      const ws = new WebSocket(`ws://${connectedCar.ip}/ws/sensor/all`);
+            
 
       ws.onopen = () => {
         setWebsocketStatus("Connected");
