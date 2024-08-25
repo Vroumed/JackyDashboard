@@ -1,12 +1,14 @@
 import { View } from "react-native";
-import Joysticks from "./Joysticks";
 import ToolBar from "./ToolBar";
+import { HeadJoystick } from "./Joysticks/HeadJoystick";
+import { ControlJoystick } from "./Joysticks/ControlJoystick";
 
 const ControlPanel = () => {
   return (
     <View>
-      <Joysticks />
+      <ControlJoystick />
       <ToolBar />
+      <HeadJoystick />
     </View>
   );
 };

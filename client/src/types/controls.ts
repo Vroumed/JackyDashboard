@@ -13,3 +13,19 @@ export type JoystickTypeData = {
     degree: number;
   };
 };
+
+export interface IControlData {
+  speed: number; // between 0 and 1
+  thrust: -1 | 1; // -1 for reverse, 1 for forward
+  direction: number; // between -1 and 1
+}
+
+export interface IHeadData {
+  headX: number; // between -1 and 1
+  headY: number; // between -1 and 1
+}
+
+export interface IBackendCommand<T> {
+  cmd: number;
+  data: T;
+}
