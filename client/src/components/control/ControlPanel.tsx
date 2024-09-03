@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import ToolBar from "./ToolBar";
-import { HeadJoystick } from "./Joysticks/HeadJoystick";
-import { ControlJoystick } from "./Joysticks/ControlJoystick";
+import { HeadJoystick } from "./joysticks/HeadJoystick";
+import { ControlJoystick } from "./joysticks/ControlJoystick";
 import { useControlStore } from "@store/controlStore";
 import useStore from "@store/useStore";
 import { IBackendCommand, IControlData, IHeadData } from "types/controls";
