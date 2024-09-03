@@ -4,7 +4,6 @@ import AppNavigator from "./src/navigation/AppNavigator";
 import TestScreen from "./src/screens/TestScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as ScreenOrientation from "expo-screen-orientation";
-import Toast from 'react-native-toast-message';
 
 export default function App() {
   const [orientation, setOrientation] = useState(1);
@@ -22,7 +21,6 @@ export default function App() {
         <GestureHandlerRootView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <AppNavigator />
-            <Toast />
         </GestureHandlerRootView>
     );
 }
