@@ -1,16 +1,19 @@
+import React from "react";
 import { View, Button, StyleSheet } from "react-native";
 import { Horn } from "./toolBarOptions/Horn";
 import LightBarButton from "./toolBarOptions/LightBarButton";
+import EmojiButton from "./toolBarOptions/EmojiButton"; // Import the new component
 import useWebSocketStore from "@store/useWebSocketStore";
 
 const ToolBar: React.FC = () => {
-  const sendMessage = useWebSocketStore(state => state.sendMessage)
+  const sendMessage = useWebSocketStore((state) => state.sendMessage);
 
   return (
     <View style={styles.container}>
       <Horn sendMessage={sendMessage} />
       <Button title="Start / Stop" />
       <LightBarButton sendMessage={sendMessage} />
+      <EmojiButton sendMessage={sendMessage} />
     </View>
   );
 };
