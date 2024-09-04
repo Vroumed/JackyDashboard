@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import ToolBar from "./ToolBar";
 import { HeadJoystick } from "./joysticks/HeadJoystick";
@@ -7,6 +7,7 @@ import { useControlStore } from "@store/controlStore";
 import useWebSocketStore from "@store/useWebSocketStore";
 import useStore from "@store/useStore";
 import { IBackendCommand, IControlData, IHeadData } from "types/controls";
+import AutoModeButton from "./toolBarOptions/AutoModeButton"; // Import the AutoModeButton component
 
 const ControlPanel: React.FC = () => {
     const { controlData, headData } = useControlStore();
@@ -16,13 +17,16 @@ const ControlPanel: React.FC = () => {
     const controlDataRef = useRef<IControlData>(controlData);
     const headDataRef = useRef<IHeadData>(headData);
 
+    const [isAutoMode, setIsAutoMode] = useState(false);
+
     useEffect(() => {
         controlDataRef.current = controlData;
         headDataRef.current = headData;
     }, [controlData, headData]);
 
+
     useEffect(() => {
-        if (status === "connected") {
+        if (status === "connected" && !isAutoMode) {
             const interval = setInterval(() => {
                 const controlCommand: IBackendCommand<IControlData> = {
                     cmd: 1,
@@ -39,15 +43,21 @@ const ControlPanel: React.FC = () => {
 
             return () => clearInterval(interval);
         }
-    }, [status, sendMessage])
+    }, [status, sendMessage, isAutoMode]);
 
     return (
         <View style={styles.container}>
             <View style={styles.joystickContainer}>
-                <ControlJoystick />
-                <HeadJoystick />
+
+                {!isAutoMode && (
+                    <>
+                        <ControlJoystick />
+                        <HeadJoystick />
+                    </>
+                )}
             </View>
             <ToolBar />
+            <AutoModeButton sendMessage={sendMessage} setAutoMode={setIsAutoMode} />
         </View>
     );
 };

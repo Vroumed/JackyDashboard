@@ -1,25 +1,19 @@
+import React from "react";
 import { View, Button, StyleSheet } from "react-native";
+import { Horn } from "./toolBarOptions/Horn";
+import LightBarButton from "./toolBarOptions/LightBarButton";
+import EmojiButton from "./toolBarOptions/EmojiButton"; // Import the new component
+import useWebSocketStore from "@store/useWebSocketStore";
 
-//! Lancer/arreter la course
-//! KLAXON !!!!
-//! Phare
-
-const ToolBar = () => {
-  const Klaxonage = () => {
-    console.log("KLAXONAAAAAGE");
-  };
-  const Race = () => {
-    console.log("RAAAACE");
-  };
-  const Light = () => {
-    console.log("LIIIIIIIIIGHT");
-  };
+const ToolBar: React.FC = () => {
+  const sendMessage = useWebSocketStore((state) => state.sendMessage);
 
   return (
     <View style={styles.container}>
-      <Button title="Klaxon" onPress={Klaxonage} />
-      <Button title="Start / Stop" onPress={Race} />
-      <Button title="Light" onPress={Light} />
+      <Horn sendMessage={sendMessage} />
+      <Button title="Start / Stop" />
+      <LightBarButton sendMessage={sendMessage} />
+      <EmojiButton sendMessage={sendMessage} />
     </View>
   );
 };
