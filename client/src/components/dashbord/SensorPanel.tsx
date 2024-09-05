@@ -1,17 +1,20 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { getAllSensorData } from "@api/sensor";
+import useStore from "@store/useStore";
 
 export const SensorPanel: React.FC = () => {
+  const { connectedCar } = useStore();
   const { data, error, isFetching } = useQuery({
-    queryKey: ["TelemetryData"],
-    queryFn: getAllSensorData,
+    queryKey: ["TelemetryData", connectedCar?.ip],
+    queryFn: () => getAllSensorData(connectedCar?.ip),
     refetchInterval: 1000,
+    enabled: !!connectedCar?.ip,
   });
-  if (isFetching) return <Text>Loading...</Text>;
+
   if (error) return <Text>Error fetching data</Text>;
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Battery Voltage: {data?.battery_voltage} V</Text>
       <Text>Photosensitive: {data?.photosensitive}</Text>
       <Text>Track Left: {data?.track_left}</Text>
@@ -21,3 +24,8 @@ export const SensorPanel: React.FC = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    position: "relative",
+  },
+});

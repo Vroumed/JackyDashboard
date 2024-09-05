@@ -45,6 +45,7 @@ const ControlPanel: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <SensorPanel />
       <View style={styles.joystickContainer}>
         <ControlJoystick />
         <HeadJoystick />

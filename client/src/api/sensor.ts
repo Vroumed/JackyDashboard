@@ -1,32 +1,28 @@
 import useStore from "@store/useStore";
 import { IbackendTelemetryData } from "types/telemetry";
-//import { TelemetryData } from "types/telemetry";
-const { connectedCar } = useStore();
 
 
-export const getAllSensorData = async ():Promise<IbackendTelemetryData | undefined> => {
+
+export const getAllSensorData = async (ip?: string): Promise<IbackendTelemetryData | undefined> => {
     try {
-        const response = await fetch(`http://${connectedCar?.ip}/sensor/all`, 
-            {
-                method:"GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                  },
-            }
-        );
-        const data = await response.json();
-        const formatedData= (data);
-        console.log("Telemetry data:", formatedData);
-        return formatedData;
+      const response = await fetch(`http://${ip}/sensor/all`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      });
+      const data = await response.json();
+      console.log("Telemetry data:", data);
+      return data;
     } catch (error) {
-        console.error("Failed to fetch telemetry data:", error);
+      console.error("Failed to fetch telemetry data:", error);
     }
-};
+  };
 
-export const getBatteryStatus = async () => {
+export const getBatteryStatus = async (ip: string) => {
     try {
-        const response = await fetch(`http://${connectedCar?.ip}/sensor/battery`, 
+        const response = await fetch(`http://${ip}/sensor/battery`, 
             {
                 method:"GET",
                 headers: {
@@ -43,9 +39,9 @@ export const getBatteryStatus = async () => {
     }
 }
 
-export const getLightStatus = async () => {
+export const getLightStatus = async (ip :string) => {
     try {
-        const response = await fetch(`http://${connectedCar?.ip}/sensor/light`, 
+        const response = await fetch(`http://${ip}/sensor/light`, 
             {
                 method:"GET",
                 headers: {
@@ -61,9 +57,9 @@ export const getLightStatus = async () => {
     }
 }
 
-export const getTrackStatus = async () => {
+export const getTrackStatus = async (ip: string ) => {
     try {
-        const response = await fetch(`http://${connectedCar?.ip}/sensor/track`, 
+        const response = await fetch(`http://${ip}/sensor/track`, 
             {
                 method:"GET",
                 headers: {
@@ -79,9 +75,9 @@ export const getTrackStatus = async () => {
     }
 }
 
-export const getSonarStatus = async () => {
+export const getSonarStatus = async (ip: string ) => {
     try {
-        const response = await fetch(`http://${connectedCar?.ip}/sensor/sonar`,
+        const response = await fetch(`http://${ip}/sensor/sonar`,
             {
                 method:"GET",
                 headers: {
