@@ -2,7 +2,9 @@ import React from "react";
 import { View, Button, StyleSheet } from "react-native";
 import { Horn } from "./toolBarOptions/Horn";
 import LightBarButton from "./toolBarOptions/LightBarButton";
-import EmojiButton from "./toolBarOptions/EmojiButton"; // Import the new component
+import EmojiButton from "./toolBarOptions/EmojiButton";
+import AutoModeButton from "./toolBarOptions/AutoModeButton";
+import RaceControlButton from "./toolBarOptions/RaceControlButton";
 import useWebSocketStore from "@store/useWebSocketStore";
 
 const ToolBar: React.FC = () => {
@@ -11,9 +13,10 @@ const ToolBar: React.FC = () => {
   return (
     <View style={styles.container}>
       <Horn sendMessage={sendMessage} />
-      <Button title="Start / Stop" />
       <LightBarButton sendMessage={sendMessage} />
       <EmojiButton sendMessage={sendMessage} />
+      {/* <AutoModeButton sendMessage={sendMessage} setAutoMode={() => { }} />// */}
+      <RaceControlButton sendMessage={sendMessage} />
     </View>
   );
 };
