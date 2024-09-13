@@ -4,6 +4,7 @@ import QRScanner from "@components/connection/QRScanner";
 import useStore from "@store/useStore";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
+import ToastShow from "utility/toast";
 
 const ConnectionScreen: React.FC = () => {
   const { connectCar, status, connectedCar, error } = useStore();
@@ -18,19 +19,11 @@ const ConnectionScreen: React.FC = () => {
         if (ip && password) {
           await connectCar(ip, password);
         } else {
-          Toast.show({
-            type: "error",
-            text1: "Error",
-            text2: "Invalid data format",
-          });
+          ToastShow("Invalid data format", "error");
         }
       }
     } catch (e) {
-      Toast.show({
-        type: "info",
-        text1: "Invalid QR Code",
-        text2: "Please scan a valid QR code.",
-      });
+      ToastShow("Please scan a valid QR code.", "info");
     }
   };
 

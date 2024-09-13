@@ -1,6 +1,7 @@
 import useStore from "@store/useStore";
 import Toast from "react-native-toast-message";
 import { IbackendTelemetryData } from "types/telemetry";
+import ToastShow from "utility/toast";
 
 export const getAllSensorData = async (
   ip?: string,
@@ -17,11 +18,7 @@ export const getAllSensorData = async (
     console.log("Telemetry data:", data);
     return data;
   } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Error",
-      text2: "Error while retrieving all sensor data",
-    });
+    ToastShow("Error while retrieving all sensor data", "error");
 
     console.error("Failed to fetch telemetry data:", error);
   }
@@ -40,11 +37,7 @@ export const getBatteryStatus = async (ip: string) => {
     console.log("battery data:", data);
     return data;
   } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Error",
-      text2: "Error while retrieving battery status",
-    });
+    ToastShow("Error while retrieving battery status", "error");
 
     console.error("Failed to fetch telemetry data:", error);
   }
@@ -63,11 +56,7 @@ export const getLightStatus = async (ip: string) => {
     console.log("light data:", data);
     return data;
   } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Error",
-      text2: "Error while retrieving light status",
-    });
+    ToastShow("Error while retrieving light status", "error");
 
     console.error("Failed to fetch light status:", error);
   }
@@ -86,11 +75,7 @@ export const getTrackStatus = async (ip: string) => {
     console.log("track data:", data);
     return data;
   } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Error",
-      text2: "Error while retrieving track status",
-    });
+    ToastShow("Error while retrieving track status", "error");
 
     console.error("Failed to fetch track status", error);
   }
@@ -109,11 +94,7 @@ export const getSonarStatus = async (ip: string) => {
     console.log("sonar data:", data);
     return data;
   } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Error",
-      text2: "Error while retrieving sonar status",
-    });
+    ToastShow("Error while retrieving sonar status", "error");
 
     console.error("Failed to fetch sonar status:", error);
   }
