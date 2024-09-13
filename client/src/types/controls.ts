@@ -29,3 +29,12 @@ export interface IBackendCommand<T> {
   cmd: number;
   data: T;
 }
+
+export interface IAutomode {
+  cmd: number;
+  data: AutomodeData;
+}
+
+export interface AutomodeData {
+  auto: number;
+}
