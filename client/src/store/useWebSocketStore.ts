@@ -1,4 +1,5 @@
 import Toast from "react-native-toast-message";
+import ToastShow from "utility/toast";
 import { create } from "zustand";
 
 interface WebSocketState {
@@ -18,28 +19,16 @@ const useWebSocketStore = create<WebSocketState>((set, get) => ({
 
     ws.onopen = () => {
       set({ status: "connected", ws });
-      Toast.show({
-        type: "success",
-        text1: "Info",
-        text2: "Communication established",
-      });
+      ToastShow("Communication established", "info");
     };
     ws.onerror = () => {
       set({ status: "error" });
-      Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: "Error while communitating with car",
-      });
+      ToastShow("Error while communitating with car", "error");
     };
 
     ws.onclose = () => {
       set({ status: "idle", ws: null });
-      Toast.show({
-        type: "info",
-        text1: "Info",
-        text2: "Lost connection",
-      });
+      ToastShow("Lost connection", "info");
     };
 
     set({ ws });
