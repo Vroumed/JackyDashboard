@@ -1,19 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, StyleSheet } from "react-native";
 import ToolBar from "./ToolBar";
 import { HeadJoystick } from "./joysticks/HeadJoystick";
 import { ControlJoystick } from "./joysticks/ControlJoystick";
 import { useControlStore } from "@store/controlStore";
 import useWebSocketStore from "@store/useWebSocketStore";
-import useStore from "@store/useStore";
 import { IBackendCommand, IControlData, IHeadData } from "types/controls";
 import { SensorPanel } from "@components/dashbord/SensorPanel";
-import AutoModeButton from "./toolBarOptions/AutoModeButton"; // Import the AutoModeButton component
 
 const ControlPanel: React.FC = () => {
   const { controlData, headData } = useControlStore();
   const { status, sendMessage } = useWebSocketStore();
-  const { connectedCar } = useStore();
 
   const controlDataRef = useRef<IControlData>(controlData);
   const headDataRef = useRef<IHeadData>(headData);
