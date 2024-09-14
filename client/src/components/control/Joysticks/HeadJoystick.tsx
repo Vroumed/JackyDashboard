@@ -9,8 +9,8 @@ export const HeadJoystick: React.FC = () => {
   const onTouchEvent = (event: AxisPadTouchEvent) => {
     if (event.eventType === "pan" || event.eventType === "end") {
       const headData: IHeadData = {
-          headX: - event.ratio.x,
-          headY: - event.ratio.y,
+        headX: -event.ratio.x,
+        headY: -event.ratio.y,
       };
       setHeadData(headData);
     }
