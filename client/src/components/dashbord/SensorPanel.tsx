@@ -5,7 +5,7 @@ import useStore from "@store/useStore";
 
 export const SensorPanel: React.FC = () => {
   const { connectedCar } = useStore();
-  const { data, error, isFetching } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["TelemetryData", connectedCar?.ip],
     queryFn: () => getAllSensorData(connectedCar?.ip),
     refetchInterval: 1000,

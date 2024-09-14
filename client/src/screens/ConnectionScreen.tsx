@@ -48,8 +48,7 @@ const ConnectionScreen: React.FC = () => {
           <Text>Ready: {connectedCar.ready ? "Yes" : "No"}</Text>
           <Button
             title="Control Car"
-            // @ts-expect-error Navigation prop type mismatch
-            onPress={() => navigation.navigate("Control")}
+            onPress={() => navigation.navigate("Control" as never)}
           />
         </View>
       )}

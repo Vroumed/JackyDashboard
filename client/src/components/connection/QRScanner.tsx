@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 
 interface QRScannerProps {
   onScan: (data: string) => void;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
 const QRScanner: React.FC<QRScannerProps> = ({ onScan, style }) => {
