@@ -31,7 +31,7 @@ const RaceDashboard: React.FC = () => {
       return result as IRaceData[];
     },
   });
-  
+
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error loading races</Text>;
 

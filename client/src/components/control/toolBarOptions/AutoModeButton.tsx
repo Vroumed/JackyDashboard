@@ -6,7 +6,10 @@ interface AutoModeButtonProps {
   setAutoMode: (enabled: boolean) => void;
 }
 
-const AutoModeButton: React.FC<AutoModeButtonProps> = ({ sendMessage, setAutoMode }) => {
+const AutoModeButton: React.FC<AutoModeButtonProps> = ({
+  sendMessage,
+  setAutoMode,
+}) => {
   const [isAutoMode, setIsAutoMode] = useState(false);
   const toggleAutoMode = () => {
     const newMode = !isAutoMode;
@@ -23,28 +26,27 @@ const AutoModeButton: React.FC<AutoModeButtonProps> = ({ sendMessage, setAutoMod
   return (
     <Pressable
       onPress={toggleAutoMode}
-      style={({ pressed }) => [
-        styles.button,
-        pressed && styles.buttonPressed
-      ]}
+      style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
     >
-      <Text style={styles.text}>{isAutoMode ? "Désactiver Mode Auto" : "Activer Mode Auto"}</Text>
+      <Text style={styles.text}>
+        {isAutoMode ? "Désactiver Mode Auto" : "Activer Mode Auto"}
+      </Text>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#f44336',
+    backgroundColor: "#f44336",
     padding: 10,
     borderRadius: 5,
   },
   buttonPressed: {
-    backgroundColor: '#d32f2f',
+    backgroundColor: "#d32f2f",
   },
   text: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

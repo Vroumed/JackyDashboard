@@ -1,4 +1,4 @@
 export interface IAuthInfo {
-    "roverIP": "string",
-    "roverKey": "string"
+  roverIP: "string";
+  roverKey: "string";
 }

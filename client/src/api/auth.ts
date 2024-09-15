@@ -8,10 +8,10 @@ export const authCar = async (carIp: string, carPassword: string) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-        body: JSON.stringify({
-            roverIP: carIp,
-            roverKey: carPassword,
-        }),
+      body: JSON.stringify({
+        roverIP: carIp,
+        roverKey: carPassword,
+      }),
     });
   } catch (error) {
     console.error("Failed to login:", error);

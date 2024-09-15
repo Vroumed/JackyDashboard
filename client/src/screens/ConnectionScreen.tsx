@@ -3,9 +3,11 @@ import { View, StyleSheet, Text, Button } from "react-native";
 import QRScanner from "@components/connection/QRScanner";
 import useCarStore from "@store/useCarStore";
 import ToastShow from "utility/toast";
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
-const ConnectionScreen: React.FC<{ navigation: NavigationProp<ParamListBase> }> = ({ navigation }) => {
+const ConnectionScreen: React.FC<{
+  navigation: NavigationProp<ParamListBase>;
+}> = ({ navigation }) => {
   const { connectCar, status, connectedCar, error } = useCarStore();
   const [showCamera, setShowCamera] = useState(false);
 

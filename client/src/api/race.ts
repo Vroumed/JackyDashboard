@@ -53,7 +53,7 @@ export const getAllRaces = async () => {
   }
 };
 
-export const endRaceById = async (raceId: string)=> {
+export const endRaceById = async (raceId: string) => {
   try {
     const response = await fetch(
       `http://${serverIP}/run/get/run/${raceId}/end`,
@@ -65,7 +65,7 @@ export const endRaceById = async (raceId: string)=> {
         },
       },
     );
-    const data : IRaceData = await response.json();
+    const data: IRaceData = await response.json();
 
     ToastShow(`Race ${raceId} ended successfully`, "success");
     return data;
