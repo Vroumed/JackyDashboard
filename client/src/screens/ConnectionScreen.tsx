@@ -3,10 +3,13 @@ import { View, StyleSheet, Text, Button, Alert } from "react-native";
 import QRScanner from "@components/connection/QRScanner";
 import useStore from "@store/useStore";
 import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+import ToastShow from "utility/toast";
 
 const ConnectionScreen: React.FC = () => {
   const { connectCar, status, connectedCar, error } = useStore();
   const [showCamera, setShowCamera] = useState(false);
+  const [testResult, setTestResult] = useState<string | null>(null);
   const navigation = useNavigation();
 
   const handleScan = async (data: string) => {
@@ -14,14 +17,13 @@ const ConnectionScreen: React.FC = () => {
       if (data) {
         const [ip, password] = data.split(";");
         if (ip && password) {
-          console.log("IP:", ip, "PASSWORD:", password);
           await connectCar(ip, password);
         } else {
-          throw new Error("Invalid data format");
+          ToastShow("Invalid data format", "error");
         }
       }
     } catch (e) {
-      Alert.alert("Invalid QR Code", "Please scan a valid QR code.");
+      ToastShow("Please scan a valid QR code.", "info");
     }
   };
 
@@ -48,11 +50,11 @@ const ConnectionScreen: React.FC = () => {
           <Text>Ready: {connectedCar.ready ? "Yes" : "No"}</Text>
           <Button
             title="Control Car"
-            // @ts-expect-error Navigation prop type mismatch
             onPress={() => navigation.navigate("Control")}
           />
         </View>
       )}
+      {testResult && <Text style={styles.resultText}>{testResult}</Text>}
     </View>
   );
 };
