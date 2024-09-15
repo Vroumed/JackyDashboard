@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
 import QRScanner from "@components/connection/QRScanner";
-import useStore from "@store/useStore";
-import { useNavigation } from "@react-navigation/native";
+import useCarStore from "@store/useCarStore";
 import ToastShow from "utility/toast";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
-const ConnectionScreen: React.FC = () => {
-  const { connectCar, status, connectedCar, error } = useStore();
+const ConnectionScreen: React.FC<{
+  navigation: NavigationProp<ParamListBase>;
+}> = ({ navigation }) => {
+  const { connectCar, status, connectedCar, error } = useCarStore();
   const [showCamera, setShowCamera] = useState(false);
-
-  const navigation = useNavigation();
 
   const handleScan = async (data: string) => {
     try {

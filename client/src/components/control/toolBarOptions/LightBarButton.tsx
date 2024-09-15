@@ -7,7 +7,11 @@ interface LightBarButtonProps {
 
 const LightBarButton: React.FC<LightBarButtonProps> = ({ sendMessage }) => {
   const getRandomColor = () => {
-    return [Math.floor(Math.random() * 256), Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)];
+    return [
+      Math.floor(Math.random() * 256),
+      Math.floor(Math.random() * 256),
+      Math.floor(Math.random() * 256),
+    ];
   };
 
   const handleLightPress = () => {
@@ -23,10 +27,7 @@ const LightBarButton: React.FC<LightBarButtonProps> = ({ sendMessage }) => {
   return (
     <Pressable
       onPress={handleLightPress}
-      style={({ pressed }) => [
-        styles.button,
-        pressed && styles.buttonPressed
-      ]}
+      style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
     >
       <Text style={styles.text}>Lumières</Text>
     </Pressable>
@@ -35,16 +36,16 @@ const LightBarButton: React.FC<LightBarButtonProps> = ({ sendMessage }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: "#4CAF50",
     padding: 10,
     borderRadius: 5,
   },
   buttonPressed: {
-    backgroundColor: '#45a049',
+    backgroundColor: "#45a049",
   },
   text: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

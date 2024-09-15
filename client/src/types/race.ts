@@ -1,5 +1,8 @@
 import { ICar } from "./car";
-import { IConnection } from "./connection";
+import { IRaceEvent } from "./connection";
+
+export interface ICollision extends IRaceEvent {}
+export interface IOffRoad extends IRaceEvent {}
 
 export interface IRaceData {
   existsInDatabase: boolean;
@@ -9,7 +12,7 @@ export interface IRaceData {
   estimatedDistance: number;
   videoUrl: string;
   car: ICar;
-  connection: IConnection;
-  collisions: IConnection[];
-  offRoads: IConnection[];
+  connection: IRaceEvent;
+  collisions: ICollision[];
+  offRoads: IOffRoad[];
 }

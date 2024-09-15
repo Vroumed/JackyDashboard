@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { getAllSensorData } from "@api/sensor";
-import useStore from "@store/useStore";
+import useCarStore from "@store/useCarStore";
 
 export const SensorPanel: React.FC = () => {
-  const { connectedCar } = useStore();
+  const { connectedCar } = useCarStore();
   const { data, error } = useQuery({
     queryKey: ["TelemetryData", connectedCar?.ip],
     queryFn: () => getAllSensorData(connectedCar?.ip),

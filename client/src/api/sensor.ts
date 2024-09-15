@@ -13,7 +13,6 @@ export const getAllSensorData = async (
       },
     });
     const data = await response.json();
-    console.log("Telemetry data:", data);
     return data;
   } catch (error) {
     ToastShow("Error while retrieving all sensor data", "error");
@@ -32,7 +31,6 @@ export const getBatteryStatus = async (ip: string) => {
       },
     });
     const data: number = await response.json();
-    console.log("battery data:", data);
     return data;
   } catch (error) {
     ToastShow("Error while retrieving battery status", "error");
@@ -51,7 +49,6 @@ export const getLightStatus = async (ip: string) => {
       },
     });
     const data: number = await response.json();
-    console.log("light data:", data);
     return data;
   } catch (error) {
     ToastShow("Error while retrieving light status", "error");
@@ -70,7 +67,6 @@ export const getTrackStatus = async (ip: string) => {
       },
     });
     const data: number = await response.json();
-    console.log("track data:", data);
     return data;
   } catch (error) {
     ToastShow("Error while retrieving track status", "error");
@@ -89,7 +85,6 @@ export const getSonarStatus = async (ip: string) => {
       },
     });
     const data: number = await response.json();
-    console.log("sonar data:", data);
     return data;
   } catch (error) {
     ToastShow("Error while retrieving sonar status", "error");

@@ -1,7 +1,8 @@
 import { IRaceData } from "types/race";
 import ToastShow from "utility/toast";
 
-const serverIP = "server ip";
+const serverIP = process.env.REACT_APP_BACKEND_URL;
+
 export const startRace = async () => {
   try {
     await fetch(`http://${serverIP}/get/run/start`, {
@@ -12,7 +13,7 @@ export const startRace = async () => {
       },
     });
   } catch (error) {
-    console.error("Failed to start race:", error);
+    ToastShow("Failed to start race", "error");
   }
 };
 
@@ -27,7 +28,6 @@ export const getRaceById = async (raceId: string, serverIP: string) => {
     });
     const data: IRaceData = await response.json();
 
-    console.log("Race data:", data);
     return data;
   } catch (error) {
     ToastShow("Error retrieving race data", "error");
@@ -35,7 +35,7 @@ export const getRaceById = async (raceId: string, serverIP: string) => {
   }
 };
 
-export const getAllRaces = async (serverIP: string) => {
+export const getAllRaces = async () => {
   try {
     const response = await fetch(`http://${serverIP}/run/get/all`, {
       method: "GET",
@@ -44,9 +44,8 @@ export const getAllRaces = async (serverIP: string) => {
         Accept: "application/json",
       },
     });
-    const data: Array<[]> = await response.json();
+    const data = await response.json();
 
-    console.log("All races data:", data);
     return data;
   } catch (error) {
     ToastShow("Error retrieving all races", "error");
@@ -54,10 +53,7 @@ export const getAllRaces = async (serverIP: string) => {
   }
 };
 
-export const endRaceById = async (
-  raceId: string,
-  serverIP: string,
-): Promise<IRaceData | undefined> => {
+export const endRaceById = async (raceId: string) => {
   try {
     const response = await fetch(
       `http://${serverIP}/run/get/run/${raceId}/end`,
@@ -69,9 +65,8 @@ export const endRaceById = async (
         },
       },
     );
-    const data = await response.json();
+    const data: IRaceData = await response.json();
 
-    console.log(`Race ${raceId} ended successfully:`, data);
     ToastShow(`Race ${raceId} ended successfully`, "success");
     return data;
   } catch (error) {
