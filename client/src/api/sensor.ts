@@ -1,5 +1,3 @@
-import useStore from "@store/useStore";
-import Toast from "react-native-toast-message";
 import { IbackendTelemetryData } from "types/telemetry";
 import ToastShow from "utility/toast";
 
