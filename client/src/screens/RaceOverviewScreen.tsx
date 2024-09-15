@@ -8,6 +8,7 @@ import { getAllRaces } from "@api/race";
 import ChartsPanel from "@components/dashbord/ChartsPanel";
 
 import { useCurrentRaceStore } from "@store/useCurrentRaceStore";
+import { IRaceData } from "types/race";
 
 const RaceDashboard: React.FC = () => {
   const [isAuto, setIsAuto] = useState(false);
@@ -25,9 +26,12 @@ const RaceDashboard: React.FC = () => {
     isLoading,
   } = useQuery({
     queryKey: ["getAllRaces"],
-    queryFn: () => getAllRaces,
+    queryFn: async () => {
+      const result = await getAllRaces();
+      return result as IRaceData[];
+    },
   });
-
+  
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error loading races</Text>;
 

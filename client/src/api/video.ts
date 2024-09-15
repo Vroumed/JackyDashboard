@@ -3,11 +3,11 @@ import ToastShow from "utility/toast";
 
 export const videoUrl = (ip: string) => `http://${ip}/video`;
 
-const apiURL = "apiurl";
+const serverIP = process.env.REACT_APP_BACKEND_URL;
 
 export const getVideoByRaceId = async ( raceId: string) => {
   try {
-    const response = await fetch(`http://${apiURL}/run/get/video/${raceId}`, {
+    const response = await fetch(`http://${serverIP}/run/get/video/${raceId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

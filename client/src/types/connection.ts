@@ -1,4 +1,4 @@
-export interface IConnection {
+export interface IRaceEvent {
   existsInDatabase: boolean;
   id: number;
   runId?: number;

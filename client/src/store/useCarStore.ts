@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import useWebSocketStore from "./useWebSocketStore";
+import { authCar } from "@api/auth";
 
 interface ConnectionState {
     connectedCar: {
@@ -14,7 +15,7 @@ interface ConnectionState {
     reconnectCar: () => Promise<void>;
 }
 
-const useStore = create<ConnectionState>((set, get) => ({
+const useCarStore = create<ConnectionState>((set, get) => ({
     connectedCar: null,
     status: "idle",
     error: null,
@@ -22,7 +23,6 @@ const useStore = create<ConnectionState>((set, get) => ({
         set({ status: "loading" });
         try {
             const url = `http://${ip}/wrover`;
-            console.log("Connecting to car", url);
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -30,7 +30,9 @@ const useStore = create<ConnectionState>((set, get) => ({
                 },
             });
             const data = await response.json();
-            console.log("Connected to car", data);
+
+            authCar(ip, password);
+
             set({ connectedCar: { ...data, ip, password }, status: "succeeded" });
             useWebSocketStore.getState().connect(ip)
         } catch (error) {
@@ -45,4 +47,4 @@ const useStore = create<ConnectionState>((set, get) => ({
     },
 }));
 
-export default useStore;
+export default useCarStore;

@@ -11,11 +11,6 @@ const AppNavigator: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Connection">
         <Stack.Screen
-          name="Connection"
-          component={ConnectionScreen}
-          options={{ title: "Connect to Car" }}
-        />
-        <Stack.Screen
           name="Control"
           component={ControlPanel}
           options={{ title: "Control Car" }}

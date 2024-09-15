@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, ImageBackground } from "react-native";
 import { Video } from "expo-av";
-import useStore from "@store/useStore";
+import useCarStore from "@store/useCarStore";
 import { videoUrl } from "@api/video";
 
 type BackgroundVideoProps = {
@@ -15,7 +15,7 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   children,
   backgroundUrl,
 }) => {
-  const { connectedCar } = useStore();
+  const { connectedCar } = useCarStore();
 
   return (
     <View style={styles.container}>
