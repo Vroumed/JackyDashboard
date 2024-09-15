@@ -1,24 +1,26 @@
 import React from "react";
-import { LineChart } from "react-native-chart-kit";
-import { Dimensions, View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
+import { BarChart } from "react-native-chart-kit";
+import { IRaceData } from "types/race";
+
+type ChartProps = {
+  races: IRaceData[];
+  type: "collisions" | "offRoads";
+};
 
 const screenWidth = Dimensions.get("window").width;
 
-const apiData = [
-  { valeur: 29.9, temps: "2023-01-01T00:00:00Z" },
-  { valeur: 71.5, temps: "2023-01-02T00:00:00Z" },
-  { valeur: 106.4, temps: "2023-01-03T00:00:00Z" },
-  { valeur: 129.2, temps: "2023-01-04T00:00:00Z" },
-  { valeur: 144.0, temps: "2023-01-05T00:00:00Z" },
-];
-
-const ChartsPanel = () => {
-  const labels = apiData.map(item => new Date(item.temps).toLocaleDateString());
-  const dataValues = apiData.map(item => item.valeur);
+const BarChartPanel: React.FC<ChartProps> = ({ races, type }) => {
+  const labels = races.map(race =>
+    new Date(race.connection.time).toLocaleDateString(),
+  );
+  const dataValues = races.map(race =>
+    type === "collisions" ? race.collisions.length : race.offRoads.length,
+  );
 
   return (
     <View style={styles.container}>
-      <LineChart
+      <BarChart
         data={{
           labels: labels,
           datasets: [
@@ -27,28 +29,24 @@ const ChartsPanel = () => {
             },
           ],
         }}
-        width={screenWidth}
+        width={screenWidth - 40}
         height={300}
-        yAxisLabel=""
+        yAxisLabel="number"
         yAxisSuffix=""
         chartConfig={{
           backgroundColor: "#1c313a",
           backgroundGradientFrom: "#455a64",
           backgroundGradientTo: "#1c313a",
-          decimalPlaces: 2, // Nombre de décimales pour les valeurs
+          decimalPlaces: 0,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           style: {
-            borderRadius: 0,
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: "#ffa726",
+            borderRadius: 15,
           },
         }}
-        bezier // Pour arrondir les courbes
         style={styles.chart}
+        showBarTops={false}
+        withVerticalLabels={true}
       />
     </View>
   );
@@ -58,14 +56,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-
-    backgroundColor: "#000", // Fond de l'application
+    backgroundColor: "#000",
   },
   chart: {
-    marginVertical: 0,
-    marginHorizontal: 40, // Suppression de toute marge verticale
-    borderRadius: 15, // Aucun arrondi sur les bords
+    marginVertical: 10,
+    marginHorizontal: 20,
+    borderRadius: 15,
   },
 });
 
-export default ChartsPanel;
+export default BarChartPanel;
